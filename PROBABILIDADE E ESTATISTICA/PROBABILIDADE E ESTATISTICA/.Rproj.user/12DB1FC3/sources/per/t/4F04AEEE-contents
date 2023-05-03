@@ -253,3 +253,259 @@ ggplot(dados_p, aes(x=tempo, y=peso, col=tamanho)) + geom_point() + geom_smooth(
 ggplot(dados_p, aes(x=fabricante, y=resistencia, fill=fabricante)) + geom_violin() + 
   labs(titles = 'Resistência x Fabricante', x = 'Fabricante', y = 'Resistência')
 
+
+
+
+
+####Modelo Binominal n = n####
+#dbinom(quantidade de sucessos, quantidade de tentativas, probabilidade de sucesso)
+p1 = dbinom(2, 5, (2/6)) 
+p2 = dbinom(0:5, 5, (2/6)) 
+#pbinom(quantidade de sucessos menor ou igual a x, ...)
+pbinom(2, 5, (2/6))
+#qbinom(probabibilidade, ...)
+qbinom(0.7901, 5, (2/6))
+#rbinom(numero de amostra, ...) = gera a quantidade de sucessos 
+rbinom(10, 5, (2/6))
+
+#Gráficos 
+##Criando base de dados
+#dbinom
+x = 0:5
+px = dbinom(x, 5, 2/6)
+dados = data.frame(x, px)
+#pbinom
+x = 0:5
+px = pbinom(x, 5, 2/6)
+dados = data.frame(x, px)
+
+
+##Gerando o grafico 
+ggplot(dados, aes(x, px)) + geom_col()
+
+
+
+####Modelo Poisson n = infinito####
+#dpois(prababilidade, media)
+dpois(35, 40)
+dpois(0:480, 40)
+#ppois(probabilidade ou menos, media)
+sum(dpois(0:45, 40))
+ppois(45, 40)
+#qpois(valor da probabilidade, media)
+qpois(0.8096, 40)
+#rpoid(amostra, media)
+rpois(10,40)
+
+##Grafico
+x = 0:100;
+px = dpois(x, 45)
+dados = data.frame(x, px)
+ggplot(dados, aes(x, px)) + geom_col()
+
+
+
+####Modelo Exponencial####
+#Usado para geralmente calcular tempo 
+#Não existe igualdade em modelos continuos 
+#exp(x, media)
+dexp(6, 1/7) ##Sempre vai ser 0
+pexp(5, 1/7) #5 ou menos
+qexp(0.5, 1/7)#probabilidade da mediana 
+rexp(10, 1/7)
+
+#Verificando que tipo de modelo usar 
+tempos = rexp(500, 1/7);
+px = dexp(tempos, 1/7);
+dados = data.frame(tempos, px)
+ggplot(dados, aes(tempos)) + geom_histogram(aes(y=..density..)) + geom_line(aes(tempos, px), col='red')
+
+####Modelo normal####
+#norm(x, media, desvio padrao)
+dnorm(20, 50, 25)#sempre 0
+p = 1-pnorm(20, 50, sqrt(25))#probabilidade de ser maior que 20 (100% - pnorm)
+##Ou
+pnorm(20, 50, 5, lower.tail = FALSE) #assim já pega maior que 20
+
+#Determinando o primeiro quartil (0.25 ou 25%)
+qnorm(0.25, 50, 5)
+
+#Amostra aleatoria de tamanho 20
+rnorm(20, 50, 5)
+
+#Grafico 
+pesos = rnorm(700, 50, 5)
+px = dnorm(pesos, 50, 5)
+dados = data.frame(pesos, dx)
+ggplot(dados, aes(pesos)) + geom_histogram(aes(y = ..density..)) + geom_line(aes(pesos, dx), col = 'red')
+
+
+####Exercicio p/ prova####
+#Ex1
+k = 1/sum(1:10)
+
+
+#Ex2
+#dbinom(quantidade de sucessos, quantidade de tentativas, probabilidade de sucesso)
+#a)
+p1 = dbinom(0, 10, 0.3)
+
+#b)x>=1
+#pbinom(quantidade de sucessos menor ou igual a x, ...)
+p2 = 1 - p1 #ou
+p2 = sum(dbinom(1:10,10, 0.3))
+
+#c)x>=3
+p3 = 1 - pbinom(2, 10, 0.3) #ou
+p3 = sum(dbinom(3:10, 10, 0.3))
+
+#d) 
+#p4 = mean(rbinom(50, 10, 0.3))
+p4 = 0.3 * 50
+
+
+#Ex3
+#a) 
+p1 = dpois(4, 4)
+
+#b)
+p2 = 1 - ppois(5, 4)
+
+#c) 
+media = 4 * 24
+p3 = ppois(85, media)
+
+#d)
+x = 0:20;
+px = dpois(x, 4)
+dados = data.frame(x, px)
+ggplot(dados, aes(x, px)) + geom_col()
+
+
+#Ex4 
+f = function(x) {x^4}
+integral = integrate(f, 0, 1)
+k = 1/0.2
+
+#Ex5
+dadosEx5 = read.csv('dadosex5.csv')
+ggplot(dadosEx5, aes(x)) +  geom_histogram(bins = 5, fill='orange')
+
+#a)
+#Modelo exponencial
+
+#b)
+media = mean(dadosEx5$x)
+
+#c) 
+p1 = 1 - pexp(2, 1/media)
+
+#d)
+p2 = pexp(5, 1/media)
+dadosEx5$px =  dexp(dadosEx5$x, 1/ media)
+ggplot(dadosEx5, aes(x, px)) + geom_histogram(aes(y=..density..)) + geom_line(col='red')
+
+
+#Ex6
+dadosEx6 = read.csv('dadosex6.csv')
+head(dadosEx6)
+ggplot(dadosEx6, aes(x)) + geom_histogram(bins = 5, fill = 'green')
+
+#a)
+#Modelo Normal
+
+#b)
+
+
+####Revisao prova####
+#Ex1
+xi = 1:10;
+p = 1;
+k = p / sum(xi)
+
+#Ex2 
+#a) nenhum falhar 
+p1 = dbinom(0, 10, 0.3)
+
+#b) no minimo 1 falhar 
+p2 = sum(dbinom(1:10, 10, 0.3))
+
+#c) ao menos 3 falharem
+p3 = 1 - pbinom(2, 10, 0.3) 
+
+#d) amostra de 50, quantos falham em média
+p4 = 50 * 0.3
+
+#e) grafico de todas as probabilidade de falhar
+x = 0:10
+px = dbinom(x, 10, 0.3)
+dados = data.frame(x, px)
+ggplot(dados, aes(x, px)) + geom_col() + theme_minimal()
+
+#Ex3
+#a) todos 4 serem defeituosos em 1 hr
+p1 = dpois(4, 4)
+
+#b) 6 ou mais defeituosos em 1 hr
+p2 = 1 - ppois(5, 4)
+
+#c) 80 defeituosos em 24 hrs
+p3 = dpois(80, 4*24)
+
+#d) grafico defeituosos em 1 hr
+x = 0:15;
+px = dpois(x, 4)
+dados = data.frame(x, px)
+ggplot(dados, aes(x, px)) + geom_col()
+
+
+#Ex4
+f = function(x) {x^4}
+int = integrate(f, 0, 1)
+k = 1/0.2
+
+
+#Ex5
+dados = read.csv('dadosex5.csv')
+head(dados)
+#a)
+x = dados$x
+px = dexp(x, 1/mean(x));
+dados = data.frame(x, px)
+ggplot(dados, aes(x)) + geom_histogram(aes(y=..density..)) + geom_line(aes(x, px), col='red')
+#resp : modelo exponencial
+
+#b) 
+mean(x)
+
+#c)
+p3 = 1 - pexp(2, 1/mean(x))
+
+#d)
+p4 = pexp(5, 1/mean(x))
+
+#e)
+ggplot(dados, aes(x)) + geom_histogram(aes(y=..density..)) + geom_line(aes(x, px), col='red')
+
+
+#Ex6
+dados = read.csv('dadosex6.csv')
+head(dados)
+ggplot(dados, aes(x)) + geom_histogram()
+
+#a)
+#resp: modelo normal
+
+#b) pesar entre 15 e 25
+media = mean(dados$x)
+variancia = sd(dados$x)
+p2 = pnorm(25, media, variancia) - pnorm(15, media, variancia) 
+
+#c) descartar 20% dos produtos de menor peso, determinar o peso limite
+p3 = qnorm(0.2, media, variancia)
+
+#d) grafico ajustado
+x = dados$x
+px = dnorm(x, media, variancia);
+dados = data.frame(x, px)
+ggplot(dados, aes(x)) + geom_histogram(aes(y=..density..)) + geom_line(aes(x, px), col='red')
