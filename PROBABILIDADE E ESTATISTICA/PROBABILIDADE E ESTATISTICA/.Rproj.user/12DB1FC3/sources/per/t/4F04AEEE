@@ -1,0 +1,26 @@
+{
+    "id": "4F04AEEE",
+    "path": "~/PROBABILIDADE E ESTATISTICA/cursoR.R",
+    "project_path": "cursoR.R",
+    "type": "r_source",
+    "hash": "3131112446",
+    "contents": "",
+    "dirty": false,
+    "created": 1682086509123.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "232,0",
+        "scrollLine": "201"
+    },
+    "folds": "125|31|145|0|\n180|24|190|0|\n191|26|199|0|\n200|21|207|0|\n226|21|230|0|\n232|10|255|0|\n",
+    "lastKnownWriteTime": 1682109877,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1682109877362,
+    "read_only": false,
+    "read_only_alternatives": []
+}
