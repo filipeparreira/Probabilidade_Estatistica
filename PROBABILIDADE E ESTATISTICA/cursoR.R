@@ -758,3 +758,17 @@ t.test(dadosEx5$temperaturaA, dadosEx5$temperaturaB, alternative = 'greater', co
 head(dadosEx6)
 ggplot(dadosEx6, aes(y= antes-apos)) + geom_boxplot()
 t.test(dadosEx6$antes, dadosEx6$apos, alternative = 'less', conf.level = 0.95)
+
+####Prova3####
+dadosEx1 = read.csv("Prova3/p3ex1.csv");
+dadosEx2 = read.csv("Prova3/p3ex2.csv");
+dadosEx3 = read.csv("Prova3/p3ex3.csv");
+dadosEx4 = read.csv("Prova3/p3ex4.csv");
+dadosEx5 = read.csv("Prova3/p3ex5.csv");
+
+##Questão 01
+head(dadosEx1)
+t.test(dadosEx1$peso, conf.level = 0.96)
+ggplot(dadosEx1, aes(peso)) + geom_histogram(bins = 12) +
+  geom_vline(xintercept = 50.63513, col = "blue") + geom_vline(xintercept = 47.51532, col = "red") +
+  geom_vline(xintercept = 49.07522, col = 'yellow')
