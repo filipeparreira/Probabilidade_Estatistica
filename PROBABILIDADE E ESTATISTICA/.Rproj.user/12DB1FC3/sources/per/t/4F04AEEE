@@ -3,7 +3,7 @@
     "path": "~/GitHub/Probabilidade_Estatistica/PROBABILIDADE E ESTATISTICA/cursoR.R",
     "project_path": "cursoR.R",
     "type": "r_source",
-    "hash": "3052131297",
+    "hash": "4273112631",
     "contents": "",
     "dirty": false,
     "created": 1682086509123.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "773,51",
-        "scrollLine": "749"
+        "cursorPosition": "785,1",
+        "scrollLine": "763"
     },
     "folds": "15|10|124|0|\n125|31|145|0|\n146|26|158|0|\n159|19|179|0|\n180|24|190|0|\n191|26|199|0|\n200|21|207|0|\n208|21|213|0|\n214|42|225|0|\n226|21|231|0|\n232|10|258|0|\n259|26|286|0|\n287|31|306|0|\n307|22|321|0|\n322|17|341|0|\n342|22|418|0|\n419|17|513|0|\n514|11|621|0|\n641|21|693|0|\n",
-    "lastKnownWriteTime": 1685029929,
+    "lastKnownWriteTime": 1685056489,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1685029929643,
+    "last_content_update": 1685056489210,
     "read_only": false,
     "read_only_alternatives": []
 }

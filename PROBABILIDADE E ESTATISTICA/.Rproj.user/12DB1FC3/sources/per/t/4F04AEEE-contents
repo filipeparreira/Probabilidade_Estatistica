@@ -772,3 +772,15 @@ t.test(dadosEx1$peso, conf.level = 0.96)
 ggplot(dadosEx1, aes(peso)) + geom_histogram(bins = 12) +
   geom_vline(xintercept = 50.63513, col = "blue") + geom_vline(xintercept = 47.51532, col = "red") +
   geom_vline(xintercept = 49.07522, col = 'yellow')
+
+##Questão 02
+head(dadosEx2)
+table(dadosEx2$tamanho)
+#De 100, 53 estão quebrados, nivel de confiança de 96%
+prop.test(53, 100, conf.level = 0.96)
+
+##Questão 03
+head(dadosEx3)
+#nivel de confiança de 95% | H0 : media = 50 -> Compra | H1 : media > 50 -> Não Compra
+t.test(dadosEx3$tempo, alternative = "greater", mu = 50, conf.level = 0.95)
+ 
