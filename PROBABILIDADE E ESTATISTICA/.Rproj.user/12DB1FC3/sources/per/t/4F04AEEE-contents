@@ -782,5 +782,25 @@ prop.test(53, 100, conf.level = 0.96)
 ##Questão 03
 head(dadosEx3)
 #nivel de confiança de 95% | H0 : media = 50 -> Compra | H1 : media > 50 -> Não Compra
+#nivel de significancia 5% ou 0.05, p-valor 0.0001, logo H0 é rejeitada.
 t.test(dadosEx3$tempo, alternative = "greater", mu = 50, conf.level = 0.95)
- 
+
+##Questão 04
+head(dadosEx4)
+#antes e apos -> dependente
+#confiança -> 94% ou 0.94 | alpha -> 6% ou 0.06
+#H0 : antes = depois | H1 : antes < depois
+t.test(dadosEx4$antes, dadosEx4$depois, alternative = "less", conf.level = 0.94, paired = T)
+#p-valor = 0.0002991
+
+##Questão 05
+head(dadosEx5)
+#maquinas diferentes -> independente
+#confiança -> 92% ou 0.92 | alpha -> 8% ou 0.08
+#H0 : mediaA - mediaB = 0 | H1 : mediaA - mediaB != 0
+t.test(dadosEx5$A, dadosEx5$B, alternative = 'two.side', conf.level = 0.92)
+#p-valor = 0.3487 > alpha | não rejeita-se H0, não afirma-se que os dois são diferentes
+
+#H0 : mediaA - mediaB = 0 | H1 : mediaA > mediaB 
+t.test(dadosEx5$A, dadosEx5$B, alternative = 'less', conf.level = 0.92)
+#p-valor = 0.1743 595.2724  612.3158 
