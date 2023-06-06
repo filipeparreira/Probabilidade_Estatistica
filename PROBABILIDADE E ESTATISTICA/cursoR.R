@@ -832,3 +832,9 @@ modelo$`Analysis of variance`
 #p-valor = 0.41, >0.05, não rejeita-se a hipotese H0, e analizando a soma dos quadrados dos tratamentos
 # e dos residuos, temos que, o valor de residuos é maior que o valor do tratamento,
 # logo, é de se concluir que o tratamento não teve efeito 
+
+
+
+####Prova4####
+dadosEx1 = read.csv("Prova4/dados1.csv")
+dadosEx2 = read.csv("Prova4/dados2.csv")
