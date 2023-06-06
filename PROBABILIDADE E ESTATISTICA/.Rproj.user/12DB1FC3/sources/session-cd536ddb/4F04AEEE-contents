@@ -820,7 +820,7 @@ modelo = ea1(dados2, design = 2)
 modelo$`Analysis of variance`
 #p-valor = <0.001, rejeita-se a H0
 modelo$`Adjusted means`
-#Dado o teste de tukey, pode-se concluirque temos dois melhores bicos, no qual 
+#Dado o teste de tukey, pode-se concluir que temos dois melhores bicos, no qual 
 # não importa qual vai ser escolhido, com tanto que seja escolhido ou o bico E
 # ou o bico B, pois os dois são semelhantes.
 
@@ -840,7 +840,15 @@ dadosEx1 = read.csv("Prova4/dados1.csv")
 dadosEx2 = read.csv("Prova4/dados2.csv")
 
 ##Ex02 - quanto mais leve melhor
+#H0 : não existe efeito de tratamento
+#H1 : Ao menos um tratamento tem efeito
 head(dadosEx1)
 ggplot(dadosEx1, aes(maquina, peso, fill = maquina)) + geom_boxplot()
 modeloEx02 = ea1(dadosEx1, design = 1)
 modeloEx02$`Analysis of variance`
+#p-valor < 0.001, ou seja, < 0.05, sendo assim, é rejeitado a H0
+modeloEx02$Means
+#Dado o teste de Tukey, pode-se concluir que tanto a máquina C quanto a máquina
+#D são ótimas máquinas, produzindo vigas mais leves, portanto, é necessario analizar
+#outros critérios entre as duas, para decidir qual escolher. Vale resaltar que,
+# analizando o boxplot dos dados, chegamos nas mesmas concluisões.
