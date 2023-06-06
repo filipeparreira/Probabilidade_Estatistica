@@ -836,15 +836,15 @@ modelo$`Analysis of variance`
 
 
 ####Prova4####
-dadosEx1 = read.csv("Prova4/dados1.csv")
-dadosEx2 = read.csv("Prova4/dados2.csv")
+dadosEx2 = read.csv("Prova4/dados1.csv")
+dadosEx3 = read.csv("Prova4/dados2.csv")
 
 ##Ex02 - quanto mais leve melhor
 #H0 : não existe efeito de tratamento
 #H1 : Ao menos um tratamento tem efeito
-head(dadosEx1)
-ggplot(dadosEx1, aes(maquina, peso, fill = maquina)) + geom_boxplot()
-modeloEx02 = ea1(dadosEx1, design = 1)
+head(dadosEx2)
+ggplot(dadosEx2, aes(maquina, peso, fill = maquina)) + geom_boxplot()
+modeloEx02 = ea1(dadosEx2, design = 1)
 modeloEx02$`Analysis of variance`
 #p-valor < 0.001, ou seja, < 0.05, sendo assim, é rejeitado a H0
 modeloEx02$Means
@@ -852,3 +852,18 @@ modeloEx02$Means
 #D são ótimas máquinas, produzindo vigas mais leves, portanto, é necessario analizar
 #outros critérios entre as duas, para decidir qual escolher. Vale resaltar que,
 # analizando o boxplot dos dados, chegamos nas mesmas concluisões.
+
+
+##Ex03 - quanto mais resistente melhor
+#H0 : não existe efeito de tratamento 
+#H1 : ao menos um tratamento tem efeito
+head(dadosEx3)
+ggplot(dadosEx3, aes(estrutura, resistencia, fill = estrutura)) + geom_boxplot()
+modeloEx03 = ea1(dadosEx3, design = 2)
+modeloEx03$`Analysis of variance`
+##P-valor = 0.0154, ou seja, < 0.05, rejeita H0
+modeloEx03$`Adjusted means`
+#Atraves do teste de tukey, chega-se a concluisão de 3 tipos estruturas possíveis
+# que demonstraram ser mais resistentes, a trelica, o cantilever, e a suspensa,
+# dessa forma, tem que ser analizado outros aspectos para decidir qual é a mais
+# viável de se escolher.

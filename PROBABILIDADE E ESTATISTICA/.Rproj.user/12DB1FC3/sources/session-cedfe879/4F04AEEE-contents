@@ -5,13 +5,14 @@ install.packages("treemapify")
 install.packages("gganimate")
 install.packages("gifski")
 install.packages("png")
+install.packages("easyanova")
 library(mosaicCalc)
 library(ggplot2)
 library(treemapify)
 library(gganimate)
 library(gifski)
 library(png)
-
+library(easyanova)
 
 ####Começo####
 x=1:4
@@ -759,48 +760,110 @@ head(dadosEx6)
 ggplot(dadosEx6, aes(y= antes-apos)) + geom_boxplot()
 t.test(dadosEx6$antes, dadosEx6$apos, alternative = 'less', conf.level = 0.95)
 
-####Prova3####
-dadosEx1 = read.csv("Prova3/p3ex1.csv");
-dadosEx2 = read.csv("Prova3/p3ex2.csv");
-dadosEx3 = read.csv("Prova3/p3ex3.csv");
-dadosEx4 = read.csv("Prova3/p3ex4.csv");
-dadosEx5 = read.csv("Prova3/p3ex5.csv");
 
-##Questão 01
-head(dadosEx1)
-t.test(dadosEx1$peso, conf.level = 0.96)
-ggplot(dadosEx1, aes(peso)) + geom_histogram(bins = 12) +
-  geom_vline(xintercept = 50.63513, col = "blue") + geom_vline(xintercept = 47.51532, col = "red") +
-  geom_vline(xintercept = 49.07522, col = 'yellow')
+####Analise De Variancia####
+tratamentos = c('d1', 'd2', 'd3')
+rep = 5
+croqui = design.crd(tratamentos, rep)
+data(data1)
+data1
 
-##Questão 02
+ggplot(data1, aes(y=Gain, x = Diet, fill=Diet)) + geom_boxplot()
+
+modelo = ea1(data1, design = 1)
+modelo$`Analysis of variance`
+modelo$Means
+
+
+##Outro tipo com blocos 
+tratamentos = c('d1', 'd2', 'd3')
+bloco = 4
+croqui = design.rcbd(tratamentos, bloco)
+
+data(data2)
+data2
+ggplot(data2, aes(y=Gain, x = Treatments, fill=Treatments )) + geom_boxplot()
+
+modelo = ea1(data2, design = 2)
+modelo$`Adjusted means`
+
+##Mudar a coluna
+#dados = data.frame(colocar n
+
+
+####Exercicios ANOVA####
+dados1 = read.csv("dados1ANOVA.csv")
+dados2 = read.csv('dados2ANOVA.csv')
+dados3 = read.csv('dados3ANOVA.csv')
+
+##Ex 01 - DIC
+head(dados1)
+ggplot(dados1, aes(y = y, x = trat, fill = trat)) + geom_boxplot() 
+croqui = design.crd(dados1$trat, 5)
+modelo = ea1(dados1, design = 1)
+modelo$`Analysis of variance`
+#H0 : não existe efeito de tratamento
+#H1 : Ao menos um tratamento tem efeito 
+# p-valor = 0.001, < 0.05, H0 rejeitado 
+modelo$Means
+#Dado o resultado do método tukey, pode-se concluir que temos duas melhores misturas
+# onde é viavel escolher a mistura e ou a mistura b, pois as duas são semelhantes
+
+##Ex 02 - DBC
+head(dados2)
+#boxplot maquina
+ggplot(dados2, aes(y = perda, x = maquina, fill = maquina)) + geom_boxplot()
+#boxplot bico
+ggplot(dados2, aes(y = perda, x = bico, fill = bico)) + geom_boxplot()
+
+modelo = ea1(dados2, design = 2)
+modelo$`Analysis of variance`
+#p-valor = <0.001, rejeita-se a H0
+modelo$`Adjusted means`
+#Dado o teste de tukey, pode-se concluir que temos dois melhores bicos, no qual 
+# não importa qual vai ser escolhido, com tanto que seja escolhido ou o bico E
+# ou o bico B, pois os dois são semelhantes.
+
+##Ex03
+head(dados3)
+ggplot(dados3, aes(y = tempo, x = reagente, fill = reagente)) + geom_boxplot() 
+modelo = ea1(dados3, design = 1)
+modelo$`Analysis of variance`
+#p-valor = 0.41, >0.05, não rejeita-se a hipotese H0, e analizando a soma dos quadrados dos tratamentos
+# e dos residuos, temos que, o valor de residuos é maior que o valor do tratamento,
+# logo, é de se concluir que o tratamento não teve efeito 
+
+
+
+####Prova4####
+dadosEx2 = read.csv("Prova4/dados1.csv")
+dadosEx3 = read.csv("Prova4/dados2.csv")
+
+##Ex02 - quanto mais leve melhor
+#H0 : não existe efeito de tratamento
+#H1 : Ao menos um tratamento tem efeito
 head(dadosEx2)
-table(dadosEx2$tamanho)
-#De 100, 53 estão quebrados, nivel de confiança de 96%
-prop.test(53, 100, conf.level = 0.96)
+ggplot(dadosEx2, aes(maquina, peso, fill = maquina)) + geom_boxplot()
+modeloEx02 = ea1(dadosEx2, design = 1)
+modeloEx02$`Analysis of variance`
+#p-valor < 0.001, ou seja, < 0.05, sendo assim, é rejeitado a H0
+modeloEx02$Means
+#Dado o teste de Tukey, pode-se concluir que tanto a máquina C quanto a máquina
+#D são ótimas máquinas, produzindo vigas mais leves, portanto, é necessario analizar
+#outros critérios entre as duas, para decidir qual escolher. Vale resaltar que,
+# analizando o boxplot dos dados, chegamos nas mesmas concluisões.
 
-##Questão 03
+
+##Ex03 - quanto mais resistente melhor
+#H0 : não existe efeito de tratamento 
+#H1 : ao menos um tratamento tem efeito
 head(dadosEx3)
-#nivel de confiança de 95% | H0 : media = 50 -> Compra | H1 : media > 50 -> Não Compra
-#nivel de significancia 5% ou 0.05, p-valor 0.0001, logo H0 é rejeitada.
-t.test(dadosEx3$tempo, alternative = "greater", mu = 50, conf.level = 0.95)
-
-##Questão 04
-head(dadosEx4)
-#antes e apos -> dependente
-#confiança -> 94% ou 0.94 | alpha -> 6% ou 0.06
-#H0 : antes = depois | H1 : antes < depois
-t.test(dadosEx4$antes, dadosEx4$depois, alternative = "less", conf.level = 0.94, paired = T)
-#p-valor = 0.0002991
-
-##Questão 05
-head(dadosEx5)
-#maquinas diferentes -> independente
-#confiança -> 92% ou 0.92 | alpha -> 8% ou 0.08
-#H0 : mediaA - mediaB = 0 | H1 : mediaA - mediaB != 0
-t.test(dadosEx5$A, dadosEx5$B, alternative = 'two.side', conf.level = 0.92)
-#p-valor = 0.3487 > alpha | não rejeita-se H0, não afirma-se que os dois são diferentes
-
-#H0 : mediaA - mediaB = 0 | H1 : mediaA > mediaB 
-t.test(dadosEx5$A, dadosEx5$B, alternative = 'less', conf.level = 0.92)
-#p-valor = 0.1743 595.2724  612.3158 
+ggplot(dadosEx3, aes(estrutura, resistencia, fill = estrutura)) + geom_boxplot()
+modeloEx03 = ea1(dadosEx3, design = 2)
+modeloEx03$`Analysis of variance`
+##P-valor = 0.0154, ou seja, < 0.05, rejeita H0
+modeloEx03$`Adjusted means`
+#Atraves do teste de tukey, chega-se a concluisão de 3 tipos estruturas possíveis
+# que demonstraram ser mais resistentes, a trelica, o cantilever, e a suspensa,
+# dessa forma, tem que ser analizado outros aspectos para decidir qual é a mais
+# viável de se escolher.
