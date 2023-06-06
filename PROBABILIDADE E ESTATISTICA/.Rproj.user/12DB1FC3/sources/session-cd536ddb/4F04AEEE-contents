@@ -838,3 +838,9 @@ modelo$`Analysis of variance`
 ####Prova4####
 dadosEx1 = read.csv("Prova4/dados1.csv")
 dadosEx2 = read.csv("Prova4/dados2.csv")
+
+##Ex02 - quanto mais leve melhor
+head(dadosEx1)
+ggplot(dadosEx1, aes(maquina, peso, fill = maquina)) + geom_boxplot()
+modeloEx02 = ea1(dadosEx1, design = 1)
+modeloEx02$`Analysis of variance`
