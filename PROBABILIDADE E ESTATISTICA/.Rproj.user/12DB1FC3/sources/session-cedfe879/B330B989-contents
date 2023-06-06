@@ -1,26 +1,59 @@
 ---
-title: "Prova4"
+title: "Prova 4"
 author: "Nome: Filipe Augusto Parreira Almeida    RA: 2320622 "
 date: "2023-06-06"
 output:
   html_document:
     df_print: paged
-
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Questão 01 - 1,0
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+### Qual o objetivo de uma análise de variância?
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+-   A análise de variância (ANOVA) tem como principal objeto analisar a variância de duas ou mais médias, onde, comparando com o teste de hipótese, leva-se em consideração outros fatores, como, variável resposta, o fator, níveis de tratamento, erro aleatório e delineamento. Existem dois modelos de análise de variância, o Delineamento Inteiramente Casualizado (DIC) e o Delineamento em Bloco Casualizado (DBC), no DIC considera-se somente o tratamento e o erro aleatório; já no DBC leva-se em consideração também a variável bloco, onde é visado diminuir o erro.
 
-```{r cars}
-summary(cars)
+## Questão 02 - 2,0
+
+### Um estudo foi elaborado para comparar o peso de vigas produzidas por 6 maquinas diferentes, sendo que quanto mais leve, melhores são as vigas. Para isso, 5 vigas de cada maquina foram testadas (dados1.csv). Faça uma análise de variância completa.
+
+-   Verificando os itens da base de dados:
+
+```{r q02-01}
+dadosEx2 = read.csv("dados1.csv")
+head(dadosEx2)
 ```
+
+-   Análise gráfica dos dados:
+
+```{r q02-02}
+library(ggplot2)
+ggplot(dadosEx2, aes(maquina, peso, fill = maquina)) + geom_boxplot()
+```
+
+##### Analisando o gráfico é possível perceber que as máquinas **C** e **D**, são as que produzem as vigas mais **leves**, comparadas com as outras máquinas, porém não se pode tirar nenhuma conclusão com esta análise.
+
+-   Realizando a análise de variância utilizando o modelo DIC:
+
+```{r q02-03}
+library(easyanova)
+modeloEx02 = ea1(dadosEx2, design = 1)
+modeloEx02$`Analysis of variance`
+```
+
+##### O P-valor assume o valor **menor** que 0.05 (5%), portanto, é válido continuar com a análise.
+
+-   Analisando as médias:
+
+```{r q02-04}
+modeloEx02$Means
+```
+
+##### Dado o teste de Tukey, pode-se concluir que tanto a máquina **C** quanto a máquina **D** são ótimas máquinas, produzindo vigas mais leves, portanto, é necessário analisar outros critérios entre as duas, para decidir qual escolher.
 
 ## Including Plots
 

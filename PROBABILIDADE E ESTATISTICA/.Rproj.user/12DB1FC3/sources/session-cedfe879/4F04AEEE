@@ -3,7 +3,7 @@
     "path": "~/GitHub/Probabilidade_Estatistica/PROBABILIDADE E ESTATISTICA/cursoR.R",
     "project_path": "cursoR.R",
     "type": "r_source",
-    "hash": "2469889618",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1682086509123.0,
@@ -12,8 +12,8 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "866,79",
-        "scrollLine": "851"
+        "cursorPosition": "850,0",
+        "scrollLine": "833"
     },
     "folds": "",
     "lastKnownWriteTime": 1686086173,

@@ -1,0 +1,2 @@
+"0","library(easyanova)"
+"0","modeloEx02 = ea1(dadosEx2, design = 1)"
