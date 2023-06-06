@@ -1,26 +1,26 @@
 {
-    "id": "123816AD",
-    "path": "~/GitHub/Probabilidade_Estatistica/PROBABILIDADE E ESTATISTICA/cursoR.R",
+    "id": "A3B8BD9E",
+    "path": "C:/Users/a2320622/Desktop/PROBABILIDADE E ESTATISTICA/cursoR.R",
     "project_path": "cursoR.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "3131299394",
     "contents": "",
     "dirty": false,
-    "created": 1686059617436.0,
+    "created": 1685622126137.0,
     "source_on_save": false,
     "relative_order": 1,
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "805,37",
-        "scrollLine": "779"
+        "cursorPosition": "833,58",
+        "scrollLine": "787"
     },
     "folds": "",
-    "lastKnownWriteTime": 1685130565,
+    "lastKnownWriteTime": 1685625773,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1685130565,
+    "last_content_update": 1685625773338,
     "read_only": false,
     "read_only_alternatives": []
 }
