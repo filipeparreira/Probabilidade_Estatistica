@@ -1,0 +1,2 @@
+"0","dadosEx03 = read.csv('dados2.csv')"
+"0","head(dadosEx03)"
